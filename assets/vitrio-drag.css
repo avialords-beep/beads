@@ -1,0 +1,4 @@
+.v-result-row{overscroll-behavior-x:contain}
+.v-result-row.is-scrollable{cursor:grab}
+.v-result-row.is-dragging{cursor:grabbing;user-select:none}
+.v-result-row.is-dragging *{pointer-events:none}
