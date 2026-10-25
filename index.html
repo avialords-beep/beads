@@ -78,6 +78,23 @@
       }
 
       var txt = (el.innerText||'').toLowerCase().replace(/\s+/g,' ').trim();
+      if(txt.indexOf('войти')!==0 && !(txt.indexOf('попробовать')>=0 || txt.indexOf('открыть студию')>=0 || txt.indexOf('начните за 1')>=0)){
+        e.stopPropagation();  /* не наша кнопка — гасим обработчик vitrio.js, навигацию делаем сами */
+        var href = el.getAttribute('href') || '';
+        var id2 = el.getAttribute('id') || '';
+        setTimeout(function(){
+          if(href && href.indexOf('#')===0){
+            var t2 = document.querySelector(href) || document.querySelector('[id="pricing-plans"]');
+            if(t2) t2.scrollIntoView({behavior:'smooth',block:'start'});
+          } else if(href && href.indexOf('/vitrio/')===0){
+            location.href = 'https://vitrio.space'+href;
+          } else if(id2==='pricing-period-month'||id2==='pricing-period-week'||id2==='pricing-period-year'){
+            var tab = document.querySelector('#'+id2);
+            if(tab) tab.dispatchEvent(new CustomEvent('v:period'));
+          }
+        }, 30);
+        return;
+      }
       if(txt.indexOf('войти')===0){
         e.preventDefault(); e.stopPropagation();
         track('login');
