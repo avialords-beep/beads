@@ -1,0 +1,181 @@
+/* Local Studio account: existing account flows, neutral Operate shell. */
+body.v-studio-refresh .v-account-settings-backdrop {
+  align-items: center;
+  padding: 24px;
+  background: rgb(0 0 0 / .48);
+  backdrop-filter: none;
+}
+
+body.v-studio-refresh .v-account-dialog :where(button,a,input,summary):focus-visible,
+body.v-studio-refresh .v-account-plan-option:has(input:focus-visible) span { outline: 0 !important; box-shadow: 0 1px 2px color-mix(in srgb,var(--v-ink) 9%,transparent), 0 0 0 3px color-mix(in srgb,var(--v-accent) 28%,transparent), 0 0 16px color-mix(in srgb,var(--v-accent) 20%,transparent); transition: box-shadow 180ms ease; }
+@media (forced-colors: active) { body.v-studio-refresh .v-account-dialog :where(button,a,input,summary):focus-visible, body.v-studio-refresh .v-account-plan-option:has(input:focus-visible) span { outline: 2px solid CanvasText !important; outline-offset: 2px; box-shadow: none; } }
+body.v-studio-refresh .v-account-dialog {
+  width: min(880px, 100%);
+  height: min(660px, calc(100dvh - 48px));
+  display: grid;
+  grid-template-columns: 208px minmax(0, 1fr);
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: var(--v-surface);
+  color: var(--v-ink);
+  box-shadow: 0 24px 80px rgb(0 0 0 / .22);
+  font-family: Unbounded, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: -.02em;
+  scrollbar-color: var(--v-copy) var(--v-muted);
+  scrollbar-width: thin;
+}
+body.v-studio-refresh .v-account-dialog :is(button, input, select, textarea) { font-family: inherit; }
+body.v-studio-refresh .v-account-dialog.v-account-loading { grid-template-columns: minmax(0, 1fr) 44px; grid-template-rows: auto 1fr; gap: 20px; padding: 28px; }
+body.v-studio-refresh .v-account-loading h2 { margin: 0; font-size: 20px; font-weight: 400; }
+body.v-studio-refresh .v-account-loading [role="status"] { grid-column: 1 / -1; grid-row: 2; color: var(--v-copy); font-size: 12px; }
+body.v-studio-refresh .v-account-loading button { grid-column: 2; grid-row: 1; }
+body.v-studio-refresh .v-account-dialog ::selection { background: var(--v-ink); color: var(--v-surface); }
+body.v-studio-refresh .v-account-dialog :is(button, a, input, summary):focus-visible { outline: 2px solid var(--v-ink); outline-offset: 3px; }
+body.v-studio-refresh .v-account-dialog :is(button, a, summary) { -webkit-tap-highlight-color: transparent; }
+body.v-studio-refresh .v-account-dialog a:not(.v-button) { color: inherit; text-underline-offset: 3px; }
+body.v-studio-refresh .v-account-dialog img { filter: grayscale(1); }
+body.v-studio-refresh .v-account-dialog-tabs {
+  gap: 28px;
+  padding: 28px 16px;
+  background: var(--v-bg);
+  border-right: 1px solid var(--v-line);
+}
+body.v-studio-refresh .v-account-dialog-kicker,
+body.v-studio-refresh .v-account-dialog-content > header > div > span { display: none; }
+body.v-studio-refresh .v-account-dialog-tabs h2 { margin: 0 10px; font-size: 17px; font-weight: 500; letter-spacing: -.03em; }
+body.v-studio-refresh .v-account-dialog-tabs [role="tablist"] { display: grid; gap: 6px; }
+body.v-studio-refresh .v-account-dialog-tabs [role="tab"] {
+  min-height: 44px;
+  gap: 10px;
+  padding: 11px 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--v-copy);
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 400;
+  box-shadow: none;
+}
+body.v-studio-refresh .v-account-dialog-tabs [role="tab"]:hover { background: var(--v-muted); color: var(--v-ink); }
+body.v-studio-refresh .v-account-dialog-tabs [role="tab"][aria-selected="true"] { background: var(--v-surface); border-color: var(--v-line); color: var(--v-ink); font-weight: 500; box-shadow: none; }
+body.v-studio-refresh .v-account-dialog-tabs .v-icon { flex: 0 0 17px; width: 17px; height: 17px; }
+body.v-studio-refresh .v-account-dialog-content { min-width: 0; background: var(--v-surface); }
+body.v-studio-refresh .v-account-dialog-content > header { min-height: 88px; gap: 16px; padding: 20px 28px; border-color: var(--v-line); }
+body.v-studio-refresh .v-account-dialog-content > header h2 { margin: 0; font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -.03em; overflow-wrap: anywhere; }
+body.v-studio-refresh .v-account-dialog .v-icon-button { flex: 0 0 44px; width: 44px; height: 44px; min-height: 44px; border: 0; border-radius: 10px; background: var(--v-bg); color: var(--v-ink); box-shadow: none; }
+body.v-studio-refresh .v-account-dialog .v-icon-button:hover { background: var(--v-muted); }
+body.v-studio-refresh :is(.v-account-profile-pane, .v-account-subscription-pane, .v-account-security-pane, .v-account-packs-pane, .v-account-history-pane) {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  align-content: start;
+  gap: 24px;
+  padding: 26px 28px 30px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+body.v-studio-refresh .v-account-summary { gap: 14px; min-width: 0; }
+body.v-studio-refresh .v-account-summary > div { min-width: 0; }
+body.v-studio-refresh .v-account-summary .v-avatar { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 12px; background: var(--v-muted); color: var(--v-ink); font-size: 17px; font-weight: 400; }
+body.v-studio-refresh .v-account-summary b { color: var(--v-ink); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+body.v-studio-refresh .v-account-summary small { margin-top: 5px; color: var(--v-copy); font-size: 10px; overflow-wrap: anywhere; }
+body.v-studio-refresh :is(.v-account-metrics, .v-account-subscription-data) { border-color: var(--v-line); border-radius: 12px; background: transparent; }
+body.v-studio-refresh :is(.v-account-metrics, .v-account-subscription-data) > div { min-width: 0; padding: 16px; border-color: var(--v-line); }
+body.v-studio-refresh :is(.v-account-metrics, .v-account-subscription-data) dt { color: var(--v-copy); font-size: 10px; line-height: 1.6; }
+body.v-studio-refresh :is(.v-account-metrics, .v-account-subscription-data) dd { margin-top: 8px; color: var(--v-ink); font-size: 22px; font-weight: 400; line-height: 1.4; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+body.v-studio-refresh .v-account-subscription-data { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body.v-studio-refresh .v-account-subscription-data > div:last-child { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--v-line); }
+body.v-studio-refresh .v-account-subscription-data dd { font-size: 12px; }
+body.v-studio-refresh .v-account-form { gap: 18px; }
+body.v-studio-refresh .v-account-dialog .v-field { min-width: 0; gap: 8px; }
+body.v-studio-refresh .v-account-dialog .v-field > span { color: var(--v-copy); font-size: 11px; font-weight: 400; }
+body.v-studio-refresh .v-account-dialog .v-field :is(input, select, textarea) { width: 100%; min-width: 0; min-height: 46px; padding: 12px 14px; border: 1px solid var(--v-line); border-radius: 10px; background: var(--v-bg); color: var(--v-ink); font-size: 12px; line-height: 1.5; caret-color: var(--v-ink); box-shadow: none; }
+body.v-studio-refresh .v-account-dialog .v-field :is(input, textarea)::placeholder { color: var(--v-copy); }
+body.v-studio-refresh .v-account-dialog .v-button { min-width: 0; min-height: 44px; height: auto; padding: 12px 18px; border: 1px solid transparent; border-radius: 10px; background: var(--v-ink); color: var(--v-surface); font-size: 11px; font-weight: 400; line-height: 1.6; white-space: normal; text-align: center; box-shadow: none; transform: none; }
+body.v-studio-refresh .v-account-dialog .v-button:hover { background: var(--v-copy); color: var(--v-surface); transform: none; box-shadow: none; }
+body.v-studio-refresh .v-account-dialog .v-button:disabled { opacity: .5; cursor: wait; transform: none; }
+body.v-studio-refresh .v-account-password { gap: 22px; border-color: var(--v-line); }
+body.v-studio-refresh :is(.v-account-password, .v-account-plan-form, .v-account-packs-intro) h3 { color: var(--v-ink); font-size: 14px; font-weight: 400; line-height: 1.5; letter-spacing: -.02em; }
+body.v-studio-refresh :is(.v-account-password p, .v-account-plan-form > div > p, .v-account-packs-intro p, .v-account-packs-note) { margin-top: 8px; color: var(--v-copy); font-size: 10px; line-height: 1.8; }
+body.v-studio-refresh .v-account-subscription { gap: 24px; }
+.v-account-subscription-pane > *, .v-account-subscription-head > div { min-width: 0; overflow-wrap: anywhere; }
+body.v-studio-refresh .v-account-cancel summary .v-icon { margin-inline: 4px; }
+body.v-studio-refresh .v-account-subscription-head { flex-wrap: wrap; align-items: center; gap: 12px; }
+body.v-studio-refresh .v-account-subscription-head > div > span { font-size: 10px; color: var(--v-copy); }
+body.v-studio-refresh .v-account-subscription-head h3 { margin-top: 5px; color: var(--v-ink); font-size: 22px; font-weight: 400; }
+body.v-studio-refresh .v-account-subscription-status { max-width: 100%; padding: 8px 10px; border-radius: 10px; background: var(--v-muted); color: var(--v-ink); font-size: 10px; font-weight: 400; line-height: 1.6; white-space: normal; }
+body.v-studio-refresh .v-account-plan-form { padding: 22px 0 0; gap: 18px; border: 0; border-top: 1px solid var(--v-line); border-radius: 0; background: transparent; }
+body.v-studio-refresh .v-account-plan-options { gap: 10px; }
+body.v-studio-refresh .v-account-plan-option { position: relative; border-radius: 10px; }
+body.v-studio-refresh .v-account-plan-option input { width: 1px; height: 1px; }
+body.v-studio-refresh .v-account-plan-option span { min-height: 94px; gap: 8px; padding: 15px; border-radius: 10px; border-color: var(--v-line); background: var(--v-bg); color: var(--v-ink); }
+body.v-studio-refresh .v-account-plan-option b { font-size: 12px; font-weight: 500; }
+body.v-studio-refresh .v-account-plan-option small { color: var(--v-copy); font-size: 10px; line-height: 1.7; }
+body.v-studio-refresh .v-account-plan-option input:checked + span { border-color: var(--v-ink); background: var(--v-muted); box-shadow: inset 0 0 0 1px var(--v-ink); }
+body.v-studio-refresh .v-account-plan-option input:focus-visible + span { outline: 2px solid var(--v-ink); outline-offset: 3px; }
+body.v-studio-refresh .v-account-dialog .v-billing-check { min-height: 44px; display: grid; grid-template-columns: 20px minmax(0, 1fr); align-items: start; gap: 12px; color: var(--v-copy); font-size: 10px; line-height: 1.8; cursor: pointer; }
+body.v-studio-refresh .v-account-dialog .v-billing-check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--v-ink); }
+body.v-studio-refresh .v-account-dialog .v-billing-check a { text-decoration: underline; }
+body.v-studio-refresh .v-account-settings-note { margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--v-muted); color: var(--v-ink); font-size: 10px; line-height: 1.8; }
+body.v-studio-refresh .v-account-cancel { border-color: var(--v-line); }
+body.v-studio-refresh .v-account-cancel summary { min-height: 44px; gap: 12px; padding: 14px 0; color: var(--v-copy); font-size: 11px; }
+body.v-studio-refresh .v-account-cancel summary:hover { color: var(--v-ink); }
+body.v-studio-refresh .v-account-cancel summary .v-icon { flex-shrink: 0; }
+body.v-studio-refresh .v-account-cancel form { gap: 16px; padding-top: 4px; }
+body.v-studio-refresh .v-account-cancel p { color: var(--v-copy); font-size: 10px; line-height: 1.8; }
+body.v-studio-refresh .v-account-cancel .v-button { border-color: var(--v-line); background: var(--v-bg); color: var(--v-ink); }
+body.v-studio-refresh .v-account-cancel .v-button:hover { background: var(--v-muted); }
+body.v-studio-refresh :is(.v-account-settings-paused, .v-account-settings-empty) { gap: 18px; padding: 0; border: 0; border-radius: 0; background: transparent; }
+body.v-studio-refresh :is(.v-account-settings-paused, .v-account-settings-empty) > span { width: 44px; height: 44px; border-radius: 12px; background: var(--v-muted); color: var(--v-ink); }
+body.v-studio-refresh :is(.v-account-settings-paused, .v-account-settings-empty) h3 { color: var(--v-ink); font-size: 18px; font-weight: 400; line-height: 1.5; }
+body.v-studio-refresh :is(.v-account-settings-paused, .v-account-settings-empty) > p { color: var(--v-copy); font-size: 11px; line-height: 1.8; }
+body.v-studio-refresh .v-account-settings-paused form { gap: 18px; margin-top: 6px; }
+body.v-studio-refresh .v-account-pack-list { gap: 0; }
+body.v-studio-refresh .v-account-pack { grid-template-columns: 48px minmax(0, 1fr) auto; gap: 14px; padding: 18px 0; border: 0; border-bottom: 1px solid var(--v-line); border-radius: 0; background: transparent; }
+body.v-studio-refresh .v-account-pack-stars,
+body.v-studio-refresh .v-account-pack--recommended .v-account-pack-stars { width: 48px; height: 48px; border-radius: 10px; background: var(--v-muted); color: var(--v-ink); font-size: 12px; font-weight: 400; font-variant-numeric: tabular-nums; }
+body.v-studio-refresh .v-account-pack h3 { color: var(--v-ink); font-size: 11px; font-weight: 500; line-height: 1.6; }
+body.v-studio-refresh .v-account-pack p { margin-top: 6px; color: var(--v-copy); font-size: 10px; line-height: 1.8; }
+body.v-studio-refresh .v-account-pack-action { gap: 8px; }
+body.v-studio-refresh .v-account-pack-action > b { color: var(--v-ink); font-size: 11px; font-weight: 500; font-variant-numeric: tabular-nums; }
+body.v-studio-refresh .v-account-pack-action .v-button { min-width: 98px; padding-inline: 14px; }
+body.v-studio-refresh .v-account-dialog .v-form-error:not([hidden]) { margin: 0; padding: 12px 14px; border: 1px solid currentColor; border-radius: 10px; color: #a52f2f; background: transparent; font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
+body.v-studio-refresh[data-studio-theme="dark"] .v-account-dialog .v-form-error:not([hidden]) { color: #ffaaa6; }
+body.v-studio-refresh .v-account-dialog[aria-busy="true"] { cursor: progress; }
+body.v-studio-refresh .v-account-dialog-state { min-width: 0; display: grid; align-content: center; justify-items: start; gap: 18px; padding: 28px; color: var(--v-copy); overflow-y: auto; }
+body.v-studio-refresh .v-account-dialog-state h3 { margin: 0; color: var(--v-ink); font-size: 18px; font-weight: 400; }
+body.v-studio-refresh .v-account-dialog-state p { margin: 0; font-size: 12px; overflow-wrap: anywhere; }
+@media (max-width: 720px) {
+  body.v-studio-refresh .v-account-settings-backdrop { align-items: center; padding: 10px; }
+  body.v-studio-refresh .v-account-dialog { width: 100%; height: min(760px, calc(100dvh - 20px)); grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); border-radius: 16px; }
+  body.v-studio-refresh .v-account-dialog-tabs { display: block; padding: 12px; border-right: 0; border-bottom: 1px solid var(--v-line); }
+  body.v-studio-refresh .v-account-dialog-tabs > div:first-child { display: none; }
+  body.v-studio-refresh .v-account-dialog-tabs [role="tablist"] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  body.v-studio-refresh .v-account-dialog-tabs [role="tab"] { justify-content: flex-start; gap: 8px; padding: 10px 8px; font-size: 10px; }
+  body.v-studio-refresh .v-account-dialog-content > header { min-height: 76px; gap: 10px; padding: 14px 16px; }
+  body.v-studio-refresh .v-account-dialog-content > header h2 { font-size: 17px; }
+  body.v-studio-refresh :is(.v-account-profile-pane, .v-account-subscription-pane, .v-account-security-pane, .v-account-packs-pane, .v-account-history-pane) { gap: 22px; padding: 22px 16px max(24px, env(safe-area-inset-bottom)); scrollbar-gutter: auto; }
+  body.v-studio-refresh .v-account-dialog .v-field :is(input, select, textarea) { font-size: 16px; }
+  body.v-studio-refresh .v-account-form .v-button { width: 100%; }
+  body.v-studio-refresh .v-account-summary b { font-size: 12px; }
+  body.v-studio-refresh .v-account-summary small { font-size: 10px; }
+  body.v-studio-refresh .v-account-metrics > div { padding: 14px 12px; }
+  body.v-studio-refresh .v-account-metrics dt { font-size: 10px; }
+  body.v-studio-refresh .v-account-metrics dd { font-size: 20px; }
+  body.v-studio-refresh .v-account-subscription-data { grid-template-columns: minmax(0, 1fr); }
+  body.v-studio-refresh .v-account-subscription-data > div + div { border-left: 0; border-top: 1px solid var(--v-line); }
+  body.v-studio-refresh .v-account-plan-options { grid-template-columns: minmax(0, 1fr); }
+  body.v-studio-refresh .v-account-plan-option span { min-height: 76px; }
+  body.v-studio-refresh .v-account-pack { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; }
+  body.v-studio-refresh .v-account-pack-stars { width: 44px; height: 44px; }
+  body.v-studio-refresh .v-account-pack-action { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
+  body.v-studio-refresh .v-account-dialog-state { padding: 24px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.v-studio-refresh .v-account-dialog *, body.v-studio-refresh .v-account-dialog *::before, body.v-studio-refresh .v-account-dialog *::after { animation: none; transition: none; scroll-behavior: auto; }
+}

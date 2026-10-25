@@ -1,0 +1,663 @@
+/* Account and support are workspace tools, not a second visual system. */
+/* ── Support & Account workspace tokens ────────────────────────── */
+.v-support-workspace,
+.v-account-workspace {
+  /* scale the inner grid to fill the entire content area */
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  max-width: 100%;
+  gap: 0;
+}
+
+.v-account-head {
+  margin-bottom: 22px;
+}
+
+.v-account-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .72fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.v-account-card,
+.v-support-create,
+.v-support-list,
+.v-support-conversation {
+  border: 1px solid var(--v-line, #dedede);
+  border-radius: 16px;
+  background: var(--v-surface, #fff);
+}
+
+.v-account-card { padding: 24px; }
+
+/* ── support tokens (neutral, no green) ───────────────────────── */
+/* Declared on the workspace (not :root) so body-level theme token
+   overrides resolve correctly in both light and dark studio themes. */
+.v-support-workspace,
+.v-account-workspace {
+  --vs-accent: var(--v-ink, #111315);
+  --vs-accent-soft: var(--v-muted, #f0efea);
+  --vs-muted-bg: #f5f5f4;
+  --vs-user-bg: var(--vs-accent-soft);
+  --vs-admin-bg: var(--v-surface, #fff);
+  --vs-focus: rgba(17,19,21,.14);
+}
+body.v-studio-refresh[data-studio-theme='dark'] .v-support-workspace,
+body.v-studio-refresh[data-studio-theme='dark'] .v-account-workspace {
+  --vs-muted-bg: var(--v-muted, #2b2b2b);
+  --vs-focus: rgba(244,244,244,.22);
+}
+.v-account-card--help {
+  background: var(--vs-muted-bg, #f5f5f4);
+  display: flex;
+  flex-direction: column;
+}
+.v-account-card--help h2 { margin: 14px 0 8px; font-size: 18px; letter-spacing: -.025em; }
+.v-account-card--help p  { margin: 0 0 18px; color: var(--v-copy, #686868); font-size: 13px; line-height: 1.55; }
+.v-account-card--help .v-button { width: 100%; justify-content: center; }
+
+.v-account-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--vs-accent-soft, #f0efea);
+  color: var(--v-ink, #111315);
+}
+.v-account-icon .v-icon { width: 18px; height: 18px; }
+
+.v-account-card-head { display: flex; align-items: center; gap: 12px; }
+.v-account-card-head > div { min-width: 0; }
+.v-account-card-head p { margin: 0 0 4px; color: var(--v-faint); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.v-account-card-head h2 { margin: 0; color: var(--v-ink); font-size: 22px; letter-spacing: -.03em; }
+/* ── Status chips (neutral, no green) ──────────────────────────── */
+.v-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.v-status--active,
+.v-status--open   { background: var(--vs-accent-soft, #f0efea); color: var(--v-ink, #111315); }
+.v-status--muted { background: #f0f1ee; color: #6a716d; }
+.v-support-workspace .v-status--closed { background: #fce9e7; color: #a13a35; }
+.v-status--progress { background: #eef2f8; color: #42617e; }
+.v-status--operator { background: #e6f0fd; color: #215798; }
+.v-status--waiting  { background: #fff3dc; color: #916216; }
+
+.v-account-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 24px 0 18px; border-block: 1px solid var(--v-line); }
+.v-account-stats > div { min-width: 0; padding: 15px 16px; }
+.v-account-stats > div + div { border-left: 1px solid var(--v-line); }
+.v-account-stats span { display: block; margin-bottom: 6px; color: var(--v-copy); font-size: 11px; }
+.v-account-stats b { display: block; color: var(--v-ink); font-size: 15px; line-height: 1.25; letter-spacing: -.02em; }
+.v-account-note,
+.v-cancel-details > form > p { max-width: 65ch; margin: 0; color: var(--v-copy); font-size: 12px; line-height: 1.55; }
+.v-account-success { margin: 19px 0 0; color: var(--v-copy, #686868); font-size: 12px; }
+.v-text-link { display: inline-block; margin-top: 17px; color: var(--v-copy, #686868); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.v-account-card--help .v-text-link { margin-top: auto; padding-top: 17px; }
+
+.v-account-grid--empty { grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); }
+.v-account-grid--empty .v-account-card { min-height: 286px; }
+.v-account-card--empty { display: flex; flex-direction: column; }
+.v-account-card--empty .v-account-note { max-width: 60ch; margin-top: 17px; }
+.v-subscription-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 22px 0; border-block: 1px solid var(--v-line); }
+.v-subscription-benefits span { min-width: 0; padding: 12px 14px; }
+.v-subscription-benefits span + span { border-left: 1px solid var(--v-line); }
+.v-subscription-benefits b,
+.v-subscription-benefits small { display: block; }
+.v-subscription-benefits b { color: var(--v-ink); font-size: 14px; letter-spacing: -.02em; }
+.v-subscription-benefits small { margin-top: 4px; color: var(--v-copy); font-size: 10px; line-height: 1.35; }
+.v-account-card--empty [data-open-plan-widget] { align-self: flex-start; margin-top: auto; }
+
+.v-plan-dialog { width: min(100% - 32px, 720px); max-height: min(90dvh, 780px); padding: 0; border: 1px solid var(--v-line); border-radius: 16px; background: #fff; color: var(--v-ink); box-shadow: 0 12px 28px rgba(17,19,21,.14); }
+.v-plan-dialog::backdrop { background: rgba(17,19,21,.32); }
+.v-plan-dialog-card { position: relative; display: grid; gap: 17px; padding: 28px; }
+.v-plan-dialog-close { position: absolute; top: 16px; right: 16px; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid var(--v-line); border-radius: 9px; background: #fff; color: var(--v-copy); }
+.v-plan-dialog-close:hover { color: var(--v-ink); background: #f6f7f3; }
+.v-plan-dialog-close .v-icon { width: 17px; height: 17px; }
+.v-plan-dialog-kicker { margin: 0; color: #638920; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.v-plan-dialog h2 { max-width: 20ch; margin: -8px 0 0; color: var(--v-ink); font-size: 27px; letter-spacing: -.035em; }
+.v-plan-dialog-copy { max-width: 62ch; margin: -8px 0 0; color: var(--v-copy); font-size: 13px; line-height: 1.55; }
+.v-plan-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.v-plan-option { display: block; cursor: pointer; }
+.v-plan-option input { position: absolute; opacity: 0; }
+.v-plan-option > span { display: grid; min-height: 154px; padding: 17px; border: 1px solid var(--v-line); border-radius: 12px; background: #fff; transition: border-color .18s var(--v-ease), background .18s var(--v-ease), box-shadow .18s var(--v-ease); }
+.v-plan-option:hover > span { border-color: #aacd6a; background: #fbfdf6; }
+.v-plan-option input:checked + span { border-color: #8dbd31; background: #f4fae7; box-shadow: inset 0 0 0 1px #8dbd31; }
+.v-plan-option i,
+.v-plan-option b,
+.v-plan-option em,
+.v-plan-option strong { display: block; font-style: normal; }
+.v-plan-option i { color: var(--v-copy); font-size: 11px; font-weight: 600; }
+.v-plan-option b { margin-top: 10px; color: var(--v-ink); font-size: 22px; letter-spacing: -.035em; }
+.v-plan-option b small { color: var(--v-copy); font-size: 11px; font-weight: 500; letter-spacing: 0; }
+.v-plan-option em { margin-top: 4px; color: #5d8520; font-size: 11px; font-weight: 650; }
+.v-plan-option strong { margin-top: auto; padding-top: 14px; color: var(--v-copy); font-size: 11px; font-weight: 450; line-height: 1.45; }
+.v-plan-consents { display: grid; gap: 9px; padding-top: 2px; }
+.v-plan-consents .v-billing-check { margin: 0; }
+.v-plan-checkout { width: 100%; justify-content: center; }
+.v-plan-dialog-legal { margin: -8px 0 0; color: var(--v-faint); font-size: 10px; line-height: 1.45; text-align: center; }
+
+.v-cancel-details { margin-top: 22px; border-top: 1px solid var(--v-line); }
+.v-cancel-details summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 17px 0 0; color: #965737; font-size: 13px; font-weight: 650; cursor: pointer; list-style: none; }
+.v-cancel-details summary::-webkit-details-marker { display: none; }
+.v-cancel-details summary .v-icon { transition: transform .18s var(--v-ease); }
+.v-cancel-details[open] summary .v-icon { transform: rotate(90deg); }
+.v-cancel-details form { display: grid; gap: 12px; padding-top: 15px; }
+.v-cancel-details .v-billing-check { margin: 0; }
+.v-cancel-details .v-button { justify-self: start; }
+
+/* ── Support layout: form+list left, conversation right, fills the tab ── */
+.v-support-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "create conversation"
+    "list   conversation";
+  gap: 14px;
+  flex: 1;
+  min-height: 520px;
+  align-items: stretch;
+}
+.v-support-create { grid-area: create; }
+.v-support-list { grid-area: list; }
+.v-support-conversation { grid-area: conversation; }
+.v-support-create,
+.v-support-list,
+.v-support-conversation { min-width: 0; }
+
+/* ── New request form ──────────────────────────────────────────── */
+.v-support-create {
+  padding: 22px;
+  background: var(--vs-muted-bg, #f5f5f4);
+  border-radius: 16px;
+  border: 1px solid var(--v-line, #dedede);
+}
+.v-support-create h2,
+.v-support-list h2,
+.v-support-dialogue h2 {
+  margin: 0;
+  color: var(--v-ink, #111315);
+  font-size: 18px;
+  letter-spacing: -.025em;
+}
+.v-support-create > p {
+  margin: 7px 0 18px;
+  color: var(--v-copy, #686868);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.v-support-create form { display: grid; gap: 13px; }
+.v-support-create textarea { min-height: 168px; resize: vertical; }
+.v-support-ai-consent { display: flex; align-items: flex-start; gap: 10px; color: var(--v-copy, #5f656b); font-size: 12px; line-height: 1.5; cursor: pointer; }
+.v-support-ai-consent input { width: 17px; height: 17px; flex: 0 0 auto; margin: 1px 0 0; accent-color: var(--v-ink, #111315); }
+.v-support-ai-consent input:focus-visible { outline: 2px solid var(--v-ink, #111315); outline-offset: 3px; }
+/* Neutral field focus and legal link inside the support form
+   (overrides shared green focus/link from vitrio.css / vitrio-polish.css). */
+.v-support-create .v-field :is(input,select,textarea):focus {
+  border-color: var(--v-ink, #111315);
+  box-shadow: 0 0 0 3px var(--vs-focus, rgba(17,19,21,.14));
+}
+.v-support-message--assistant { align-self: flex-start; background: var(--vs-muted-bg, #f5f5f4); }
+.v-support-create .v-form-legal a {
+  color: var(--v-copy, #686868);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.v-support-create .v-form-legal a:hover { color: var(--v-ink, #111315); }
+.v-support-create .v-button { width: 100%; justify-content: center; }
+
+/* ── Ticket list ───────────────────────────────────────────────── */
+.v-support-list { overflow: hidden; }
+.v-support-list > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 21px 20px 14px;
+  border-bottom: 1px solid var(--v-line, #dedede);
+}
+.v-support-list > header span {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--vs-accent-soft, #f0efea);
+  color: var(--v-ink, #111315);
+  font-size: 11px;
+  font-weight: 700;
+}
+.v-support-list > div { display: grid; max-height: 540px; overflow: auto; }
+
+/* ── Ticket row ────────────────────────────────────────────────── */
+.v-ticket-row {
+  width: 100%;
+  padding: 15px 18px;
+  border: 0;
+  border-bottom: 1px solid var(--v-line, #dedede);
+  background: var(--v-surface, #fff);
+  color: var(--v-ink, #111315);
+  text-align: left;
+  cursor: pointer;
+  transition: background .18s var(--v-ease);
+}
+.v-ticket-row:last-child { border-bottom: 0; }
+.v-ticket-row:hover,
+.v-ticket-row.is-active { background: var(--vs-accent-soft, #f0efea); }
+.v-ticket-row-top { display: flex; align-items: center; justify-content: space-between; gap: 7px; }
+.v-ticket-row b { overflow: hidden; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.v-ticket-row .v-status { flex: 0 0 auto; margin: 0; }
+.v-ticket-row small { display: block; margin-top: 6px; color: var(--v-faint, #737373); font-size: 11px; }
+.v-support-empty { padding: 34px 20px; color: var(--v-copy, #686868); text-align: center; }
+.v-support-empty .v-icon { width: 26px; height: 26px; margin-bottom: 8px; opacity: .55; }
+.v-support-empty b,
+.v-support-empty p { display: block; margin: 0; }
+.v-support-empty b { color: var(--v-ink, #111315); font-size: 13px; }
+.v-support-empty p { margin-top: 5px; font-size: 12px; line-height: 1.45; }
+
+/* ── Conversation panel (fills remaining height) ───────────────── */
+.v-support-conversation {
+  display: flex;
+  min-height: 520px;
+  flex-direction: column;
+}
+.v-support-dialogue {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  padding: 23px;
+  flex-direction: column;
+  flex: 1;
+}
+.v-support-dialogue > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid var(--v-line, #dedede);
+}
+.v-support-dialogue > header p {
+  margin: 0 0 4px;
+  color: var(--v-faint, #737373);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+.v-support-dialogue .v-status { margin: 0; }
+
+/* ── Refund state panel (neutral) ──────────────────────────────── */
+.v-refund-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 11px 12px;
+  border: 1px solid var(--v-line, #dedede);
+  border-radius: 10px;
+  background: var(--vs-accent-soft, #f0efea);
+}
+.v-refund-state > span {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 8px;
+  background: var(--v-surface, #fff);
+  color: var(--v-ink, #111315);
+}
+.v-refund-state .v-icon { width: 15px; height: 15px; }
+.v-refund-state b,
+.v-refund-state p { display: block; margin: 0; }
+.v-refund-state b { font-size: 12px; }
+.v-refund-state p { margin-top: 2px; color: var(--v-copy, #686868); font-size: 12px; }
+
+/* ── Message thread ────────────────────────────────────────────── */
+.v-support-thread {
+  display: flex;
+  min-height: 0;
+  margin: 18px -4px 14px;
+  padding: 0 4px;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+}
+.v-support-message {
+  max-width: min(82%, 500px);
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--vs-admin-bg, #fff);
+  border: 1px solid var(--v-line, #dedede);
+  color: var(--v-ink, #111315);
+}
+.v-support-message--user {
+  align-self: flex-end;
+  background: var(--vs-accent-soft, #f0efea);
+  border-color: transparent;
+}
+.v-support-message span,
+.v-support-message time { display: block; color: var(--v-faint, #737373); font-size: 11px; }
+.v-support-message--user span { color: var(--v-ink, #111315); }
+.v-support-message p { margin: 6px 0 8px; font-size: 13px; line-height: 1.55; }
+.v-support-message time { opacity: .65; }
+
+/* ── Reply form ────────────────────────────────────────────────── */
+.v-support-reply {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 12px;
+  align-items: end;
+  margin-top: auto;
+  padding: 14px;
+  border: 1px solid var(--v-line, #dedede);
+  border-radius: 12px;
+  background: var(--vs-muted-bg, #f5f5f4);
+}
+.v-support-reply .sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  grid-column: 1 / -1;
+  color: var(--v-faint, #737373);
+  font-size: 11px;
+  font-weight: 600;
+}
+.v-support-reply textarea {
+  box-sizing: border-box;
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+  min-height: 76px;
+  max-height: 148px;
+  padding: 12px 13px;
+  border: 1px solid var(--v-line, #dedede);
+  border-radius: 10px;
+  background: var(--v-surface, #fff);
+  color: var(--v-ink, #111315);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+  outline: 0;
+  resize: vertical;
+  transition: border-color .18s var(--v-ease), box-shadow .18s var(--v-ease);
+}
+.v-support-reply textarea::placeholder { color: var(--v-faint, #737373); opacity: 1; }
+.v-support-reply textarea:focus {
+  border-color: var(--v-ink, #111315);
+  box-shadow: 0 0 0 3px var(--vs-focus, rgba(17,19,21,.12));
+}
+.v-support-reply .v-button {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 126px;
+  min-height: 48px;
+  padding-inline: 18px;
+}
+.v-support-closed {
+  margin: auto 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--v-line, #dedede);
+  color: var(--v-copy, #686868);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.v-support-dialogue--empty { align-items: center; justify-content: center; color: var(--v-copy); text-align: center; }
+.v-support-dialogue--empty .v-icon { width: 28px; height: 28px; margin-bottom: 9px; opacity: .48; }
+.v-support-dialogue--empty p { max-width: 27ch; margin: 7px 0 0; font-size: 12px; line-height: 1.5; }
+
+@media (max-width: 1200px) {
+  .v-support-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "create"
+      "list"
+      "conversation";
+    min-height: 0;
+  }
+  .v-support-conversation { min-height: 430px; }
+}
+
+@media (max-width: 768px) {
+  .v-account-workspace,
+  .v-support-workspace { padding-bottom: 38px; }
+  .v-account-head { margin-bottom: 20px; }
+  .v-account-grid { grid-template-columns: 1fr; gap: 12px; }
+  /* Single column: reset desktop grid-areas so no column track survives,
+     and allow children to shrink inside the narrow viewport. */
+  .v-support-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: "create" "list" "conversation";
+    gap: 12px;
+    min-height: 0;
+    flex: none;
+  }
+  .v-support-list,
+  .v-support-conversation { min-width: 0; }
+  .v-ticket-row { min-width: 0; }
+  .v-ticket-row b { min-width: 0; }
+  .v-ticket-row-top { flex-wrap: wrap; }
+  .v-ticket-row .v-status { margin-left: 0; }
+  .v-account-grid--empty .v-account-card { min-height: 0; }
+  .v-account-card,
+  .v-support-create,
+  .v-support-dialogue { padding: 19px; }
+  .v-account-card-head { align-items: flex-start; flex-wrap: wrap; }
+  .v-account-card-head .v-status { margin-left: 48px; }
+  .v-account-stats { grid-template-columns: 1fr; margin-top: 19px; }
+  .v-account-stats > div { padding: 12px 0; }
+  .v-account-stats > div + div { border-top: 1px solid var(--v-line); border-left: 0; }
+  .v-subscription-benefits { grid-template-columns: 1fr; margin: 18px 0; }
+  .v-subscription-benefits span { padding: 10px 0; }
+  .v-subscription-benefits span + span { border-top: 1px solid var(--v-line); border-left: 0; }
+  .v-account-card--empty [data-open-plan-widget] { width: 100%; justify-content: center; }
+  .v-plan-dialog { width: min(100% - 20px, 720px); max-height: calc(100dvh - 20px); }
+  .v-plan-dialog-card { gap: 14px; padding: 22px 18px; }
+  .v-plan-dialog h2 { padding-right: 34px; font-size: 24px; }
+  .v-plan-options { grid-template-columns: 1fr; }
+  .v-plan-option > span { min-height: 0; }
+  .v-cancel-details .v-button { width: 100%; justify-content: center; }
+  .v-support-create textarea { min-height: 130px; }
+  .v-support-list > div { max-height: 260px; }
+  .v-support-conversation { min-height: 420px; }
+  .v-support-message { max-width: 90%; }
+  .v-support-reply { grid-template-columns: 1fr; padding: 12px; }
+  .v-support-reply textarea { grid-column: 1; grid-row: 2; min-height: 88px; }
+  .v-support-reply .v-button { grid-column: 1; grid-row: 3; width: 100%; justify-content: center; }
+}
+
+/* Dark studio theme: tokens on .v-support-workspace handle surfaces;
+   keep the extra rule only for elements outside the workspace. */
+
+@media (prefers-reduced-motion: reduce) {
+  .v-cancel-details summary .v-icon,
+  .v-ticket-row { transition: none; }
+}
+
+/* The conversation remains mounted while delivery and reply states change. */
+body.v-studio-refresh .v-support-thread {
+  flex: 1 1 0;
+  min-height: 0;
+  max-height: none;
+  padding: 3px 5px 8px;
+  overflow-anchor: none;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--v-line) transparent;
+}
+.v-support-workspace { scroll-margin-top: 24px; }
+.v-support-conversation { scroll-margin-top: 18px; }
+.v-support-message { flex: 0 0 auto; overflow-wrap: anywhere; }
+.v-support-message footer { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; }
+body.v-studio-refresh .v-support-message time { color: var(--v-copy); opacity: 1; font-size: 10px; }
+.v-support-message [data-message-delivery] { color: var(--v-copy); font-size: 10px; line-height: 1.6; }
+.v-support-message.is-pending { border-color: var(--v-line); }
+.v-support-message.has-send-error [data-message-delivery] { color: var(--v-ink); }
+.v-support-message [data-message-delivery]:empty { display: none; }
+.v-support-message [data-message-delivery] button,
+.v-support-refresh-error button {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border: 1px solid var(--v-line);
+  border-radius: 999px;
+  background: var(--v-surface);
+  color: var(--v-ink);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s cubic-bezier(.22,1,.36,1), border-color .2s cubic-bezier(.22,1,.36,1);
+}
+.v-support-message [data-message-delivery] button:hover,
+.v-support-refresh-error button:hover { background: var(--v-muted); border-color: var(--v-ink); }
+body.v-studio-refresh .v-app .v-support-workspace :is(button, textarea, .partner-admin-select-trigger):focus-visible,
+body.v-studio-refresh .v-support-consent-dialog :is(button, a):focus-visible {
+  /* The shared Studio focus reset is !important; this contour stays on the control. */
+  outline: 2px solid var(--v-ink) !important;
+  outline-offset: 0;
+  box-shadow: none;
+}
+@media (forced-colors: active) {
+  body.v-studio-refresh .v-app .v-support-workspace :is(button, textarea, .partner-admin-select-trigger):focus-visible,
+  body.v-studio-refresh .v-support-consent-dialog :is(button, a):focus-visible { outline-color: CanvasText !important; }
+}
+.v-support-workspace textarea { caret-color: var(--v-ink); }
+.v-support-workspace ::selection { background: var(--v-ink); color: var(--v-surface); }
+body.v-studio-refresh .v-support-reply { border-radius: 18px; }
+body.v-studio-refresh .v-support-reply[hidden],
+body.v-studio-refresh .v-support-closed[hidden],
+.v-support-typing[hidden], .v-support-refresh-error[hidden] { display: none; }
+body.v-studio-refresh .v-support-reply .v-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 126px; }
+.v-support-typing {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  color: var(--v-copy);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.v-support-typing-dots { display: inline-flex; align-items: center; gap: 4px; padding-inline: 2px; }
+.v-support-typing-dots i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: v-support-dot 1.2s ease-in-out infinite; }
+.v-support-typing-dots i:nth-child(2) { animation-delay: .15s; }
+.v-support-typing-dots i:nth-child(3) { animation-delay: .3s; }
+.v-support-refresh-error { margin: 0 0 12px; color: var(--v-copy); font-size: 11px; line-height: 1.6; }
+.v-support-message.is-arriving { animation: v-support-message-in .24s cubic-bezier(.22,1,.36,1) both; }
+.v-support-loading { justify-content: center; gap: 14px; }
+.v-support-loading p { color: var(--v-copy); font-size: 12px; }
+.v-support-skeleton { width: min(82%, 430px); height: 70px; border-radius: 18px; background: var(--v-muted); }
+.v-support-skeleton:nth-child(2) { align-self: flex-end; width: min(60%, 280px); }
+.v-support-consent-dialog { width: min(100%, 480px); border-radius: 28px; }
+.v-support-consent-dialog .v-dialog-titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+body.v-studio-refresh .v-support-consent-dialog .v-dialog-titlebar h2 { padding: 0; font-size: 20px; line-height: 1.35; }
+.v-support-consent-dialog > p { color: var(--v-copy); font-size: 12px; line-height: 1.7; }
+.v-support-consent-policy { color: var(--v-ink); font-size: 11px; line-height: 1.6; text-underline-offset: 3px; }
+.v-support-consent-actions { display: grid; gap: 10px; margin-top: 24px; }
+body.v-studio-refresh .v-support-consent-actions .v-button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+body.v-studio-refresh .v-support-consent-actions .v-button--accent { background: var(--v-ink); color: var(--v-surface); }
+body.v-studio-refresh .v-support-consent-actions .v-button--soft { background: var(--v-muted); color: var(--v-ink); }
+@keyframes v-support-message-in { from { opacity: .35; transform: translateY(6px); } }
+@keyframes v-support-dot { 0%, 70%, 100% { opacity: .4; transform: translateY(0); } 35% { opacity: 1; transform: translateY(-3px); } }
+/* Support is a bounded workspace, unlike content-length project/account pages.
+   Scope beyond the later-loaded Studio shell's grow-content rules. */
+body.v-studio-refresh .v-app .v-support-conversation,
+body.v-studio-refresh .v-app .v-support-dialogue {
+  min-height: 0;
+  overflow: hidden;
+}
+body.v-studio-refresh .v-app .v-support-dialogue > :is(header, [data-support-refund], .v-support-typing, .v-support-refresh-error, .v-support-reply, .v-support-closed) {
+  flex-shrink: 0;
+}
+body.v-studio-refresh .v-app .v-support-reply textarea {
+  max-height: 160px;
+  overflow: auto;
+}
+@media (min-width: 901px) {
+  body.v-studio-refresh .v-app:not(.v-app--studio):has(.v-workspace.v-support-workspace),
+  body.v-studio-refresh .v-app:not(.v-app--studio):has(.v-workspace.v-support-workspace) > .v-app-shell {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+  body.v-studio-refresh .v-app .v-support-workspace {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+  body.v-studio-refresh .v-app .v-support-workspace > header { flex: 0 0 auto; }
+  body.v-studio-refresh .v-app .v-support-layout {
+    flex: 1 1 0;
+    min-height: 0;
+    grid-template-columns: minmax(260px, 400px) minmax(0, 1fr);
+    grid-template-rows: minmax(0, auto) minmax(100px, 1fr);
+    grid-template-areas: "create conversation" "list conversation";
+  }
+  body.v-studio-refresh .v-app .v-support-create {
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body.v-studio-refresh .v-app .v-support-create textarea { max-height: 160px; }
+  body.v-studio-refresh .v-app .v-support-list {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  body.v-studio-refresh .v-app .v-support-list > header { flex: 0 0 auto; }
+  body.v-studio-refresh .v-app .v-support-list > div {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    align-content: start;
+    overscroll-behavior: contain;
+  }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+  body.v-studio-refresh .v-app .v-support-layout {
+    grid-template-columns: minmax(260px, .9fr) minmax(0, 1.3fr);
+  }
+  body.v-studio-refresh .v-app .v-support-dialogue { padding: 18px; }
+  body.v-studio-refresh .v-app .v-support-dialogue > header { flex-wrap: wrap; }
+}
+@media (max-width: 900px) {
+  .v-support-layout:has([data-support-dialogue]) { grid-template-areas: "create" "conversation" "list"; }
+  body.v-studio-refresh .v-app .v-support-conversation {
+    height: calc(100dvh - var(--sr-header, 64px) - 32px);
+    max-height: calc(100dvh - var(--sr-header, 64px) - 32px);
+    scroll-margin-top: calc(var(--sr-header, 64px) + 16px);
+  }
+}
+@media (max-width: 768px) {
+  body.v-studio-refresh .v-app .v-support-dialogue { padding: 18px; }
+  .v-support-message { max-width: 94%; padding: 11px 12px; }
+  .v-support-message p { font-size: 12px; }
+  .v-support-consent-backdrop { padding: 12px; }
+  .v-support-consent-dialog { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-support-message.is-arriving,
+  .v-support-typing-dots i { animation: none; }
+  .v-support-message [data-message-delivery] button,
+  .v-support-refresh-error button { transition: none; }
+}
