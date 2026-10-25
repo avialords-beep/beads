@@ -60,7 +60,7 @@
       var b = e.target.closest && e.target.closest('[data-pricing-period]');
       if(b) currentPeriod = b.getAttribute('data-pricing-period') || 'week';
     }, true);
-    function track(n){ try{ if(window.ym) ym(ID,'reachGoal',n||'click_cta'); }catch(e){} }
+    function track(n){ try{ if(window.ym) window.ym(ID,'reachGoal',n||'click_cta'); }catch(e){} }
 
     /* Перехват ДО того как vitrio.js начнёт свои переходы: слушаем на window, capture */
     function handler(e){
