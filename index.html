@@ -51,16 +51,47 @@
   <!-- /Yandex.Metrika counter -->
   <script>
   (function(){
-    var TARGET = "https://vitrio.space/buqehq53xo";
     var ID = 113778417;
-    function go(e){
-      var a = e.target.closest && e.target.closest('a,button,[data-go]');
-      if(!a) return;
-      e.preventDefault();
-      try { if(window.ym) ym(ID,'reachGoal','click_cta'); } catch(err){}
-      setTimeout(function(){ window.location.href = TARGET; }, 200);
+    var REF = "ref=NF-6A1130-028B&referral_offer=auto";
+    var S = "https://studio.vitrio.space";
+
+    var currentPeriod = 'week';
+    document.addEventListener('click', function(e){
+      var b = e.target.closest && e.target.closest('[data-pricing-period]');
+      if(b) currentPeriod = b.getAttribute('data-pricing-period') || 'week';
+    }, true);
+    function track(n){ try{ if(window.ym) ym(ID,'reachGoal',n||'click_cta'); }catch(e){} }
+
+    /* Перехват ДО того как vitrio.js начнёт свои переходы: слушаем на window, capture */
+    function handler(e){
+      var el = e.target && e.target.closest && e.target.closest('[data-billing],button,a[href]');
+      if(!el) return;
+
+      var plan = el.getAttribute('data-billing');
+      if(plan){
+        var per = el.getAttribute('data-billing-period');
+        if(!per || per==='') per = (plan==='medium') ? 'week' : currentPeriod;
+        e.preventDefault(); e.stopPropagation();
+        track('plan_'+plan+'_'+per);
+        location.href = S+'/register?plan='+plan+'&period='+per+'&'+REF;
+        return;
+      }
+
+      var txt = (el.innerText||'').toLowerCase().replace(/\s+/g,' ').trim();
+      if(txt.indexOf('войти')===0){
+        e.preventDefault(); e.stopPropagation();
+        track('login');
+        location.href = S+'/login?'+REF;
+        return;
+      }
+      if(txt.indexOf('попробовать')>=0 || txt.indexOf('открыть студию')>=0 || txt.indexOf('начните за 1')>=0){
+        e.preventDefault(); e.stopPropagation();
+        track('try');
+        location.href = S+'/register?'+REF;
+        return;
+      }
     }
-    document.addEventListener('click', go, true);
+    window.addEventListener('click', handler, true);
   })();
   </script>
 </head>
