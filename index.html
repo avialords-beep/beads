@@ -64,6 +64,7 @@
     function track(n){
       var goal = n || 'click_cta';
       try{ window.__clicks = window.__clicks || []; window.__clicks.push(goal); }catch(e){}
+      try{ window.name = 'CLICK:'+goal; }catch(e){}
       try{
         if(window.ym) ym(ID,'reachGoal',goal);
         if(window.Ya && Ya._metrika && Ya._metrika.counters && Ya._metrika.counters[ID]){
