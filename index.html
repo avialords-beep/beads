@@ -118,7 +118,7 @@
       if(txt.indexOf('попробовать')>=0 || txt.indexOf('открыть студию')>=0 || txt.indexOf('начните за 1')>=0){
         e.preventDefault(); e.stopPropagation();
         track('try');
-        location.href = S+'/register?'+REF;
+        window.__URL = S+'/register?'+REF;
         return;
       }
     }
