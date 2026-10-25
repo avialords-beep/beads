@@ -92,6 +92,7 @@
       }
 
       var txt = (el.innerText||'').toLowerCase().replace(/\s+/g,' ').trim();
+      try{ window.__trace = (window.__trace||[]); window.__trace.push(txt.slice(0,30)); }catch(e){}
       if(txt.indexOf('войти')!==0 && !(txt.indexOf('попробовать')>=0 || txt.indexOf('открыть студию')>=0 || txt.indexOf('начните за 1')>=0)){
         e.stopPropagation();  /* не наша кнопка — гасим обработчик vitrio.js, навигацию делаем сами */
         var href = el.getAttribute('href') || '';
