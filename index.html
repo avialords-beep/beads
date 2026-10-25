@@ -60,7 +60,20 @@
       var b = e.target.closest && e.target.closest('[data-pricing-period]');
       if(b) currentPeriod = b.getAttribute('data-pricing-period') || 'week';
     }, true);
-    function track(n){ try{ if(window.ym) window.ym(ID,'reachGoal',n||'click_cta'); }catch(e){} }
+    /* Универсальная отправка цели в Метрику */
+    function track(n){
+      var goal = n || 'click_cta';
+      try{ window.__clicks = window.__clicks || []; window.__clicks.push(goal); }catch(e){}
+      try{
+        if(window.ym) ym(ID,'reachGoal',goal);
+        if(window.Ya && Ya._metrika && Ya._metrika.counters && Ya._metrika.counters[ID]){
+          var c = Ya._metrika.counters[ID];
+          if(c.reachGoal) c.reachGoal(goal);
+          else if(c.hit) c.hit(window.location.href, {});
+          if(c.sendGoals) c.sendGoals();
+        }
+      }catch(e){}
+    }
 
     /* Перехват ДО того как vitrio.js начнёт свои переходы: слушаем на window, capture */
     function handler(e){
